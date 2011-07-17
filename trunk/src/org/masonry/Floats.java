@@ -1,4 +1,4 @@
-package com.me;
+package org.masonry;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,31 +12,19 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Masonry extends ViewGroup {
+public class Floats extends ViewGroup {
 	
-	private int margin;
+	private int gutter;
 	
 	private int measuredHeight;
 	
 	private int measuredWidth;
-	
-	public Masonry(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
 
-	public Masonry(Context context, AttributeSet attrs) {
+	public Floats(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Masonry);
-		margin = a.getDimensionPixelSize(R.styleable.Masonry_margin, 0);
+		gutter = a.getDimensionPixelSize(R.styleable.Masonry_gutter, 0);
 		a.recycle();
-	}
-
-	public Masonry(Context context) {
-		super(context);
-	}
-	
-	public void setMargin(int margin){
-		this.margin = margin;
 	}
 	
 	@Override
@@ -66,7 +54,7 @@ public class Masonry extends ViewGroup {
 			LayoutParams size = child.getLayoutParams();
 			if(i > 0){
 				Layout lastLayout = layouts.get(i - 1);
-				int leftOffset = lastLayout.right  + margin;
+				int leftOffset = lastLayout.right  + gutter;
 				int childWidth = size.width; 
 				if(leftOffset + childWidth <= measuredWidth){
 					currentOffset.left = leftOffset;
@@ -83,17 +71,17 @@ public class Masonry extends ViewGroup {
 						int backLeft = backLayout.left;
 						if(backLayout.bottom == maxBottom){
 							break;
-						}else if(backLeft + margin + childWidth <= measuredWidth){
+						}else if(backLeft + gutter + childWidth <= measuredWidth){
 							if(currentOffset.left >= backLeft){
 								currentOffset.left = backLeft;
-								currentOffset.top = backLayout.bottom + margin;
+								currentOffset.top = backLayout.bottom + gutter;
 								floated = true;
 							}
 						}
 					}
 					if(!floated){
 						currentOffset.left = 0;
-						currentOffset.top = maxBottom + margin;
+						currentOffset.top = maxBottom + gutter;
 					}
 				}
 			}

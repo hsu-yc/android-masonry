@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<declare-styleable name="Masonry">
-		<attr name="margin" format="dimension" />
+		<attr name="columnWidth" format="dimension" />
+		<attr name="gutter" format="dimension" />
 	</declare-styleable>
 </resources>
