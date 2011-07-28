@@ -7,7 +7,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,7 +28,6 @@ public class Masonry extends ViewGroup {
 		super(context, attrs);
 		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Masonry);
 		gutter = a.getDimensionPixelSize(R.styleable.Masonry_gutter, 0);
-		Log.v("gutter", gutter + "");
 		columnWidth = a.getDimensionPixelSize(R.styleable.Masonry_columnWidth, 0);
 		a.recycle();
 	}
@@ -54,26 +52,23 @@ public class Masonry extends ViewGroup {
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		containerWidth = getWidth();
-		Log.v("containerWidth", containerWidth + "");
+		measureChildren(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		List<View> bricks = new ArrayList<View>();
 		for(int i=0; i<getChildCount(); i++){
 			bricks.add(getChildAt(i));
 		}
 		if(columnWidth == 0){
-			columnWidth = (bricks.isEmpty()?containerWidth:bricks.get(0).getLayoutParams().width) + gutter;
+			columnWidth = (bricks.isEmpty()?containerWidth:bricks.get(0).getMeasuredWidth()) + gutter;
 		}
-		Log.v("columnWidth", columnWidth + "");
 		cols = Math.max(Double.valueOf(Math.floor((double)(containerWidth + gutter)
 			/columnWidth)).intValue(), 1);
-		Log.v("cols", cols + "");
 		colYs = new ArrayList<Integer>();
 		for (int i=0; i<cols; i++) {
 			colYs.add(0);
 		}
 		List<Style> styleQueue = new ArrayList<Style>();
 		for(View brick : bricks){
-			LayoutParams layout = brick.getLayoutParams();
-			int colSpan = Math.min(Double.valueOf(Math.ceil((double)layout.width
+			int colSpan = Math.min(Double.valueOf(Math.ceil((double)brick.getMeasuredWidth()
 				/ columnWidth)).intValue(), cols);
 			if(colSpan == 1){
 				placeBrick(brick, colYs, styleQueue);
@@ -87,15 +82,12 @@ public class Masonry extends ViewGroup {
 			}
 		}
 		containerHeight = Collections.max(colYs);
-		Log.v("containerHeight", containerHeight + "");
 		for (Style s : styleQueue) {
 			Position position = s.position;
 			int left = position.left;
 			int top = position.top;
 			View brick = s.brick;
-			LayoutParams layout = brick.getLayoutParams();
-			brick.layout(left, top, left + layout.width, top + layout.height);
-			Log.v("brick", left + "," + top + ", " + (left + layout.width) + ", " + (top + layout.height));
+			brick.layout(left, top, left + brick.getMeasuredWidth(), top + brick.getMeasuredHeight());
 		}
 	}
 	

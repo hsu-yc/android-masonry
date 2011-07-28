@@ -14,30 +14,30 @@
 	<ScrollView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
-			<org.masonry.Floats
-					android:id="@+id/masonry"
-				    android:layout_width="fill_parent"
-				    android:layout_height="wrap_content"
-				    android:paddingTop="5dp"
-				    masonry:gutter="5dp">
-				<include layout="@layout/small_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/long_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/wide_item" />
-				<include layout="@layout/long_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/large_item" />
-				<include layout="@layout/wide_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/large_item" />
-				<include layout="@layout/wide_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/long_item" />
-				<include layout="@layout/wide_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/small_item" />
-				<include layout="@layout/small_item" />
-			</org.masonry.Floats>
+		<org.masonry.Floats
+				android:id="@+id/masonry"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:paddingTop="5dp"
+			    masonry:gutter="5dp">
+			<include layout="@layout/small_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/long_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/wide_item" />
+			<include layout="@layout/long_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/large_item" />
+			<include layout="@layout/wide_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/large_item" />
+			<include layout="@layout/wide_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/long_item" />
+			<include layout="@layout/wide_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/small_item" />
+			<include layout="@layout/small_item" />
+		</org.masonry.Floats>
 	</ScrollView>
 </LinearLayout>

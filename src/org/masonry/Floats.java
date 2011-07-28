@@ -47,15 +47,15 @@ public class Floats extends ViewGroup {
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		measuredWidth = getWidth();
+		measureChildren(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Offset currentOffset = new Offset();
 		List<Layout> layouts = new ArrayList<Layout>();
 		for(int i=0; i<getChildCount(); i++){
 			View child = getChildAt(i);
-			LayoutParams size = child.getLayoutParams();
+			int childWidth = child.getMeasuredWidth();
 			if(i > 0){
 				Layout lastLayout = layouts.get(i - 1);
 				int leftOffset = lastLayout.right  + gutter;
-				int childWidth = size.width; 
 				if(leftOffset + childWidth <= measuredWidth){
 					currentOffset.left = leftOffset;
 				}else{
@@ -88,8 +88,8 @@ public class Floats extends ViewGroup {
 			Layout layout = new Layout();
 			layout.left = currentOffset.left;
 			layout.top =  currentOffset.top;
-			layout.right = layout.left + size.width;
-			layout.bottom = layout.top + size.height;
+			layout.right = layout.left + childWidth;
+			layout.bottom = layout.top + child.getMeasuredHeight();
 			layouts.add(layout);
 			child.layout(layout.left, layout.top, layout.right, layout.bottom);
 		}
