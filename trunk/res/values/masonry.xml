@@ -3,5 +3,7 @@
 	<declare-styleable name="Masonry">
 		<attr name="columnWidth" format="dimension" />
 		<attr name="gutter" format="dimension" />
+		<attr name="animated" format="boolean" />
+		<attr name="duration" format="integer" />
 	</declare-styleable>
 </resources>
