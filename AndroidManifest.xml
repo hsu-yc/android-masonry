@@ -6,7 +6,7 @@
 
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name="MasonryActivity"
+        <activity android:name=".FloatsActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
         <activity 
-        	android:name="AfterActivity"
+        	android:name=".MasonryActivity"
 			android:label="@string/app_name"
 		/>
     </application>
