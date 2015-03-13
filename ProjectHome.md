@@ -1,0 +1,1 @@
+This project provides dynamic grid layouts for Android.
